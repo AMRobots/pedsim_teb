@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+  <include file="$(find pedsim_simulator)/launch/simple_pedestrians.launch"/>
+  <!--  ****** Maps *****  -->
+  <!-- <node name="map_server" pkg="map_server" type="map_server" args="$(find teb_local_planner_tutorials)/maps/maze.yaml" output="screen">
+    <param name="frame_id" value="map"/>
+  </node> -->
+  <include file="$(find pedsim_sensors)/launch/obstacle_pcd_sensor.launch" >
+    <arg name="origin_x" value="5.0"/>
+    <arg name="origin_y" value="5.0"/>
+    <arg name="range" value="50.0"/>
+  </include>
+
+  <include file="$(find pedsim_sensors)/launch/people_pcd_sensor.launch" >
+    <arg name="origin_x" value="5.0"/>
+    <arg name="origin_y" value="5.0"/>
+  </include>
+
+  <!-- <include file="$(find pedsim_sensors)/launch/occlusion_pcd_sensor.launch" >
+    <arg name="origin_x" value="5.0"/>
+    <arg name="origin_y" value="5.0"/>
+  </include> -->
+
+	<include file="$(find pedsim_teb)/launch/includes/move_base.launch.xml" >
+    <!-- <remap from="/cmd_vel" to="/pedbot/control/cmd_vel" /> -->
+  </include>
+</launch>
