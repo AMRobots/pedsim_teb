@@ -21,8 +21,25 @@ z_resolution: 0.2
 z_voxels: 2
 publish_voxel_map: false
 
+obstacle_layer:
+ enabled: true
+ obstacle_range: 3.0
+ raytrace_range: 5.0
+ max_obstacle_height:    20.0            # 2.0 m set to higher than flight height
+ min_obstacle_height:    -20.0            # set just below flight height
+ inflation_radius: 0.7
+ track_unknown_space: true
+ combination_method: 1
+
+inflation_layer:
+  enabled:              true
+  cost_scaling_factor:  10.0  # exponential rate at which the obstacle cost drops off (default: 10)
+  inflation_radius:     0.7  # max. distance from an obstacle at which costs are incurred for planning paths.
+
+
 # observation_sources: scan bump
 #observation_sources: scan
+# observation_sources: bump
 
 # scan: {data_type: LaserScan, topic: scan, marking: true, clearing: true, min_obstacle_height: 0.25, max_obstacle_height: 0.35}
 # Our lasers (Xtion and fake) either needs to publish a height, or set min_obstacle_height to 0.0:
@@ -30,4 +47,4 @@ publish_voxel_map: false
 # Note taht the max_obstacle_height is very important too!
 # scan: {data_type: LaserScan, topic: scan, marking: true, clearing: true, min_obstacle_height: 0.0, max_obstacle_height: 3}
 # Can we just set up two of these here?
-# bump: {data_type: PointCloud2, topic: mobile_base/sensors/bumper_pointcloud, marking: true, clearing: false, min_obstacle_height: 0.0, max_obstacle_height: 0.15}
+# bump: {data_type: PointCloud , sensor_frame: odom, topic: /pedsim_people_sensor/point_cloud_local, marking: true, clearing: true, min_obstacle_height: 0.0, max_obstacle_height: 3 }
