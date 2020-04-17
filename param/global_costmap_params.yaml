@@ -10,7 +10,8 @@ global_costmap:
    height: 30.0
    resolution: 0.1
    transform_tolerance: 0.5
-
+   # origin_x: -15
+   # origin_y: -15
    plugins:
     # - {name: static_layer,            type: "costmap_2d::StaticLayer"}
     - {name: obstacle_layer,          type: "costmap_2d::ObstacleLayer"}
@@ -19,4 +20,4 @@ global_costmap:
    obstacle_layer:
      observation_sources: bump #scan
      # scan: {data_type: LaserScan, topic: scan, marking: true, clearing: true, min_obstacle_height: 0.0, max_obstacle_height: 3}
-     bump: {data_type: PointCloud, topic: /pedsim_obstacle_sensor/point_cloud_global, marking: true, clearing: false, min_obstacle_height: 0.0, max_obstacle_height: 1}
+     bump: {data_type: PointCloud, topic: /pedsim_obstacle_sensor/point_cloud_global, sensor_frame: base_footprint, marking: true, clearing: true, min_obstacle_height: 0.0, max_obstacle_height: 3}

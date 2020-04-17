@@ -3,25 +3,31 @@
 
   <!-- run environment from pedsim -->
   <include file="$(find pedsim_simulator)/launch/simple_pedestrians.launch">
-    <arg name="visualize" default="false"/>
-    <!-- hide default Rviz -->
+    <arg name="visualize" default="false"/>  <!-- hide default Rviz -->
+    <arg name="simulation_factor" value="3.0"/> <!-- Speed up -->
   </include>
 
   <!-- Rviz -->
   <node pkg="rviz" type="rviz" name="rviz" args="-d $(find pedsim_teb)/config/rviz/pedsim_teb.rviz"/>
 
   <!-- tf stactic transform-->
-  <!-- <node pkg="tf" type="static_transform_publisher" name="link1_broadcaster" args="1 0 0 0 0 0 1 odom base_laser_link 100" /> -->
+  <!-- <node pkg="tf" type="static_transform_publisher" name="link1_broadcaster" args="0 0 0 0 0 0 odom map 100" /> -->
+  <!-- <node name="static_tf0" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 /odom /base_link 100"/> -->
 
   <!-- convert PointCloud to PointCloud2 -->
-  <node pkg="point_cloud_converter" type="point_cloud_converter_node" name="point_to_point2">
+  <!-- <node pkg="point_cloud_converter" type="point_cloud_converter_node" name="point_to_point2">
     <remap from="points_in" to="pedsim_people_sensor/point_cloud_local"/>
-  </node>
+  </node> -->
 
   <!-- convert PointCloud2 to LaserScan -->
-  <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="point_to_laser">
+  <!-- <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="point_to_laser">
     <remap from="cloud_in" to="points2_out"/>
-  </node>
+  </node> -->
+
+  <!-- convert PointCloud2 to PointCloud -->
+  <!-- <node pkg="point_cloud_converter" type="point_cloud_converter_node" name="point2_to_point">
+    <remap from="points2_in" to="pedsim_people_sensor/point_cloud_local"/>
+  </node> -->
 
   <!-- ****** Maps ***** -->
   <!-- <node name="map_server" pkg="map_server" type="map_server" args="$(find diff_drive_robot)/maps/diff_world_obstacles.yaml" output="screen">
@@ -30,8 +36,8 @@
 
   <!-- obstacle sensor -->
   <include file="$(find pedsim_sensors)/launch/obstacle_pcd_sensor.launch">
-    <arg name="origin_x" value="0.0"/>
-    <arg name="origin_y" value="0.0"/>
+    <arg name="origin_x" value="5.0"/>
+    <arg name="origin_y" value="5.0"/>
     <arg name="range" value="15.0"/>
   </include>
 
