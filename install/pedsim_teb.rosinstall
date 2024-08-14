@@ -1,0 +1,8 @@
+- git:
+    local-name: teb_local_planner
+    uri: https://github.com/AMRobots/teb_local_planner.git
+    version: pedsim_teb
+- git:
+    local-name: pedsim_ros
+    uri: https://github.com/AMRobots/pedsim_ros.git
+    version: pedsim_teb

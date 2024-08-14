@@ -1,8 +1,8 @@
 global_costmap:
    global_frame: odom
    robot_base_frame: base_footprint
-   update_frequency: 1.0
-   publish_frequency: 0.5
+   update_frequency: 10.0
+   publish_frequency: 2
    static_map: false
    transform_tolerance: 0.5
 
@@ -13,11 +13,9 @@ global_costmap:
    # origin_x: -15
    # origin_y: -15
    plugins:
-    # - {name: static_layer,            type: "costmap_2d::StaticLayer"}
     - {name: obstacle_layer,          type: "costmap_2d::ObstacleLayer"}
     - {name: inflation_layer,         type: "costmap_2d::InflationLayer"}
 
    obstacle_layer:
-     observation_sources: bump #scan
-     # scan: {data_type: LaserScan, topic: scan, marking: true, clearing: true, min_obstacle_height: 0.0, max_obstacle_height: 3}
-     bump: {data_type: PointCloud, topic: /pedsim_obstacle_sensor/point_cloud_global, sensor_frame: base_footprint, marking: true, clearing: true, min_obstacle_height: 0.0, max_obstacle_height: 3}
+     observation_sources: Pointsensor   #scan
+     Pointsensor: {data_type: PointCloud, topic: /pedsim_obstacle_sensor/point_cloud_global, sensor_frame: base_footprint, marking: true, clearing: true, min_obstacle_height: 0.0, max_obstacle_height: 3}

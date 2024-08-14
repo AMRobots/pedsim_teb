@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+  <!-- run environment from pedsim -->
+  <include file="$(find pedsim_simulator)/launch/simple_pedestrians.launch">
+    <arg name="visualize" default="false"/>  <!-- hide default Rviz -->
+    <arg name="simulation_factor" value="3.0"/> <!-- Speed up -->
+  </include>
+
+  <!-- Rviz -->
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find pedsim_teb)/config/rviz/pedsim_teb_rviz.rviz"/>
+
+  <!-- pedsim's agents to teb_local_planner's obstacles -->
+  <node pkg="pedsim_teb" type="convert_pedsim_env_to_teb" name="agent_to_obstacle_converter">
+  </node>
+
+  <!-- test_optim_node -->
+  <include file="$(find teb_local_planner)/launch/test_optim_node.launch">
+    <arg name="visual" value="false"/>
+  </include>
+
+</launch>

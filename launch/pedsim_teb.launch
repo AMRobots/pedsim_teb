@@ -16,12 +16,14 @@
 
   <!-- convert PointCloud to PointCloud2 -->
   <!-- <node pkg="point_cloud_converter" type="point_cloud_converter_node" name="point_to_point2">
-    <remap from="points_in" to="pedsim_people_sensor/point_cloud_local"/>
+    <remap from="points_in" to="/pedsim_obstacle_sensor/point_cloud_local"/>
   </node> -->
 
   <!-- convert PointCloud2 to LaserScan -->
   <!-- <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="point_to_laser">
-    <remap from="cloud_in" to="points2_out"/>
+    <remap from="cloud_in" to="/points2_out"/>
+    <param name="use_inf" value="False"/>
+    <param name="target_frame" value="base_footprint"/>
   </node> -->
 
   <!-- convert PointCloud2 to PointCloud -->

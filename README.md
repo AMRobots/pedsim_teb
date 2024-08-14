@@ -1,24 +1,38 @@
 #  Introduction
-This project used navigation stack (move_base), plus [teb_local_planner](http://wiki.ros.org/teb_local_planner)
-to control different robot in environment created by [pedsim_ros](https://github.com/srl-freiburg/pedsim_ros).
+This project used for bridging pedsim simulator and teb_local_planner
 
 # Using
-## Clone and build [pedsim_ros](https://github.com/srl-freiburg/pedsim_ros)
-Follow the guide [here](https://github.com/srl-freiburg/pedsim_ros/blob/master/README.md) to clone, build pedsim_ros.
-
-**Note:**
-- If you use Ubuntu 16.04/ROS Kinetic and earlier. you can skip to [Clone this project](./README.md#Clone-this-project)
-- With Ubuntu 18.04/ROS Melodic, maybe you must fix [**spencer_tracking_rviz_plugin/TrackedPersons' failed to load**](https://github.com/srl-freiburg/pedsim_ros/issues/34) error as following:
+## Install deps
 ```
-$ cd to/top/level/catkin/workspace
-$ catkin_make --only-pkg-with-deps spencer_tracking_rviz_plugin
+sudo apt install ros-melodic-costmap-converter
 ```
 
-## Clone this project
+## Create workspace
 ```
-$ git clone https://github.com/AMRobots/pedsim_teb.git
+cd
+mkdir -p catkin_ws/src
+cd catkin_ws/src
+git clone https://github.com/AMRobots/pedsim_teb.git
+wstool init
+wstool merge ./pedsim_teb/install/pedsim_teb.rosinstall
+wstool update
 ```
-## Try it out
+
+## Build
+```
+cd ~/catkin_ws
+catkin_make
+source devel/setup.bash
+```
+
+## Try it out without mapping and navigation
+Directly convert agents from pedim to teb_local_planner's obstacles by `convert_pedsim_env_to_teb` node:
+
+```
+$ roslaunch pedsim_teb pedsim_teb_no_mapping.launch
+```
+
+## Try it out with navigation
 ```
 $ roslaunch pedsim_teb pedsim_teb.launch
 ```
