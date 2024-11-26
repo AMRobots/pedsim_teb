@@ -5,4 +5,4 @@
 - git:
     local-name: pedsim_ros
     uri: https://github.com/AMRobots/pedsim_ros.git
-    version: pedsim_teb
+    version: master
